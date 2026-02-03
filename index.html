@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Be My Valentine ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ff4d6d, #ff99ac);
+        font-family: Arial, Helvetica, sans-serif;
+        overflow: hidden;
+    }
+
+    .card {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        position: relative;
+        max-width: 350px;
+    }
+
+    h1 {
+        color: #ff3366;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: #444;
+    }
+
+    .bear {
+        width: 160px;
+        margin-bottom: 10px;
+    }
+
+    .buttons {
+        margin-top: 20px;
+        position: relative;
+        height: 120px;
+    }
+
+    button {
+        padding: 12px 22px;
+        font-size: 18px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.15s ease;
+        position: absolute;
+    }
+
+    #yesBtn {
+        background: #ff3366;
+        color: white;
+        left: 40px;
+        top: 40px;
+    }
+
+    #yesBtn:hover {
+        transform: scale(1.1);
+    }
+
+    #noBtn {
+        background: #ddd;
+        color: #333;
+        left: 180px;
+        top: 40px;
+    }
+
+    .love-message {
+        display: none;
+        margin-top: 15px;
+        font-size: 18px;
+        color: #ff3366;
+        font-weight: bold;
+        animation: pop 0.6s ease forwards;
+    }
+
+    @keyframes pop {
+        from { transform: scale(0.5); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .heart {
+        position: absolute;
+        color: #ff3366;
+        font-size: 24px;
+        animation: floatUp 4s linear forwards;
+    }
+
+    @keyframes floatUp {
+        from { transform: translateY(100vh); opacity: 1; }
+        to { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    .success-page {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #ff4d6d, #ff99ac);
+        overflow: hidden;
+        z-index: 1000;
+        animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .success-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        position: relative;
+        z-index: 10;
+    }
+
+    .love-messages-container {
+        text-align: center;
+        color: white;
+        max-width: 600px;
+        padding: 20px;
+    }
+
+    .main-message {
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        animation: scaleIn 0.8s ease 0.3s backwards;
+    }
+
+    .secondary-message {
+        font-size: 28px;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: 20px;
+        line-height: 1.6;
+        animation: slideUp 0.8s ease 0.6s backwards;
+    }
+
+    .tertiary-message {
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.85);
+        margin-top: 30px;
+        font-style: italic;
+        animation: slideUp 0.8s ease 0.9s backwards;
+    }
+
+    @keyframes scaleIn {
+        from { transform: scale(0.5); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes slideUp {
+        from { transform: translateY(30px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .floating-hearts-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .floating-heart {
+        position: absolute;
+        font-size: 40px;
+        animation: floatHeart 6s ease-in forwards;
+        opacity: 0.8;
+    }
+
+    @keyframes floatHeart {
+        0% {
+            transform: translateY(0) translateX(0) scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) translateX(100px) scale(0);
+            opacity: 0;
+        }
+    }
+
+    .sparkle {
+        position: absolute;
+        animation: sparkleAnimation 1.5s ease-out forwards;
+    }
+
+    @keyframes sparkleAnimation {
+        0% {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0.5) rotate(180deg);
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <!-- Dudu Bubu style cute bear image -->
+    <img class="bear" src="dudububu.jpeg" alt="Cute bear love" />
+
+    <h1>Vaishu, Will You Be My Valentine? 💖</h1>
+    <p>You are my favorite person in the whole world 🥺</p>
+
+    <div class="buttons" id="buttons">
+        <button id="yesBtn">Yes ❤️</button>
+        <button id="noBtn">No 🙈</button>
+    </div>
+
+    <div class="love-message" id="loveMessage">
+        Yaaay!! I love you sooo much 💞🌹<br>
+        You made the right choice and make my life brighter every day ✨
+    </div>
+</div>
+
+<div class="hearts" id="hearts"></div>
+
+<!-- Success Page -->
+<div class="success-page" id="successPage">
+    <div class="floating-hearts-background" id="floatingHeartsBackground"></div>
+    <div class="success-content">
+        <div class="love-messages-container">
+            <div class="main-message">🎉 YES! 🎉</div>
+            <div class="secondary-message">
+                You made the right choice and made me the happiest person in the world! 💕<br>
+                I love you so much more than words can say 💖
+            </div>
+            <div class="tertiary-message">
+                You are my favorite person, my love, and my soulmate. 
+                Let's create beautiful memories together forever 🌹✨
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+const loveMessage = document.getElementById('loveMessage');
+const buttonsBox = document.getElementById('buttons');
+const successPage = document.getElementById('successPage');
+const floatingHeartsBackground = document.getElementById('floatingHeartsBackground');
+
+// --- Stronger run-away logic ---
+// Button jumps away when cursor gets near (not just hover)
+document.addEventListener('mousemove', (e) => {
+    const rect = noBtn.getBoundingClientRect();
+    const dx = e.clientX - (rect.left + rect.width/2);
+    const dy = e.clientY - (rect.top + rect.height/2);
+    const distance = Math.sqrt(dx*dx + dy*dy);
+
+    if (distance < 120) {
+        moveNoFar();
+    }
+});
+
+function moveNoFar() {
+    const boxRect = buttonsBox.getBoundingClientRect();
+    const maxX = boxRect.width - noBtn.offsetWidth;
+    const maxY = boxRect.height - noBtn.offsetHeight;
+
+    const randX = Math.random() * maxX;
+    const randY = Math.random() * maxY;
+
+    noBtn.style.left = randX + 'px';
+    noBtn.style.top = randY + 'px';
+}
+
+// Extra safety — if somehow hovered, still escape
+noBtn.addEventListener('mouseenter', moveNoFar);
+
+// YES button click
+yesBtn.addEventListener('click', () => {
+    showSuccessPage();
+});
+
+// Show success page with effects
+function showSuccessPage() {
+    successPage.style.display = 'block';
+    spawnFloatingHearts();
+    spawnSparkles();
+}
+
+// Floating hearts effect for success page
+function spawnFloatingHearts() {
+    const container = floatingHeartsBackground;
+    const heartEmojis = ['💖', '💕', '💗', '💝', '💓', '🌹', '✨', '💘'];
+    
+    for (let i = 0; i < 40; i++) {
+        const h = document.createElement('div');
+        h.className = 'floating-heart';
+        h.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.top = '100vh';
+        h.style.fontSize = (30 + Math.random() * 40) + 'px';
+        h.style.animationDelay = (Math.random() * 3) + 's';
+        h.style.setProperty('--tx', (Math.random() * 200 - 100) + 'px');
+        container.appendChild(h);
+        setTimeout(() => h.remove(), 9000);
+    }
+}
+
+// Sparkle effect
+function spawnSparkles() {
+    const container = floatingHeartsBackground;
+    const sparkles = ['✨', '⭐', '💫'];
+    
+    setInterval(() => {
+        const s = document.createElement('div');
+        s.className = 'sparkle';
+        s.innerText = sparkles[Math.floor(Math.random() * sparkles.length)];
+        s.style.left = Math.random() * 100 + 'vw';
+        s.style.top = Math.random() * 100 + 'vh';
+        s.style.fontSize = (16 + Math.random() * 24) + 'px';
+        container.appendChild(s);
+        setTimeout(() => s.remove(), 1500);
+    }, 200);
+}
+
+// Floating hearts effect (original)
+function spawnHearts() {
+    const container = document.getElementById('hearts');
+    for (let i = 0; i < 25; i++) {
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.innerText = '💖';
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.animationDelay = (Math.random() * 2) + 's';
+        h.style.fontSize = (16 + Math.random() * 24) + 'px';
+        container.appendChild(h);
+        setTimeout(() => h.remove(), 4000);
+    }
+}
+</script>
